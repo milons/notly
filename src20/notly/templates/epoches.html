@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <h1>Epoches</h1>
+                    <p>Browse your music epoches</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for epoch in epoches %}
+            <div class="col-lg-4">
+                <div class="card epoch_card" style="width: 18rem;">
+                    <a href="/epoch/{{epoch.href}}"><img class="card-img-top" src="/static/images/{{ epoch.main_image }}" alt="{{ epoch.name }}"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ epoch.name }}</h5>
+                        <p class="card-text">{{ epoch.description }}</p>
+                        <a href="/epoch/{{epoch.href}}" class="btn btn-primary">More...</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
