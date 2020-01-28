@@ -25,8 +25,9 @@
             {% for epoch in epoches %}
             <div class="col-lg-4">
                 <div class="card epoch_card" style="width: 18rem;">
-                    <a href="/epoch/{{epoch.href}}"><img class="card-img-top"
-                            src="/static/images/{{ epoch.main_image }}" alt="{{ epoch.name }}"></a>
+                    <a href="/epoch/{{epoch.href}}">
+                        <img class="card-img-top" src="/static/images/{{ epoch.main_image }}" alt="{{ epoch.name }}">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ epoch.name }}</h5>
                         <h6>{{ epoch.starting_year }} - {{ epoch.ending_year }}</h6>
