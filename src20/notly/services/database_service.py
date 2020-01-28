@@ -5,10 +5,11 @@ from notly.config import DatabasePath
 
 
 class NotlyDbService:
+    
     db_path = None
 
-    def __init__(self, user):
-        self.user = user
+    def __init__(self):
+        # self.user = user
         self.db_path = DatabasePath.Notly
 
     def __enter__(self):
@@ -25,7 +26,7 @@ class NotlyDbService:
 
     def _get_connection_and_cursor(self):
         # app.logger.info("Opening database with path: {}".format(self.db_path))
-        self.connection = sqlite3.connect(self.db_path)
+        self.connection = sqlite3.connect(self.db_path.value)
         self.cursor = self.connection.cursor()
 
     def get_epoches(self):
