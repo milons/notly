@@ -5,7 +5,7 @@ from notly.config import DatabasePath
 
 
 class NotlyDbService:
-    
+
     db_path = None
 
     def __init__(self):
@@ -29,7 +29,67 @@ class NotlyDbService:
         self.connection = sqlite3.connect(self.db_path.value)
         self.cursor = self.connection.cursor()
 
+###### EPOCHES ######
+
     def get_epoches(self):
-        self.cursor.execute("SELECT * FROM epoches")
-        epoches = self.cursor.fetchall()
-        return [dict(zip([cursor[0] for cursor in self.cursor.description], epoch)) for epoch in epoches]
+        self.cursor.execute(\
+            "SELECT e.name, e.href, e.main_image, e.description, e.starting_year, e.ending_year "\
+            "FROM epoches e")
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection]
+
+    def get_epoch(self, epoch_href):
+        request = \
+            "SELECT e.name, e.main_image, e.full_description, e.starting_year, e.ending_year "\
+            "FROM epoches e "\
+            "WHERE e.href = '{}'".format(epoch_href)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
+###### ARTISTS ######
+    def get_artists_by_epoch(self, epoch_href):
+        request = \
+            "SELECT a.id, a.name, a.href, a.description, a.main_image "\
+            "FROM artists a "\
+            "LEFT JOIN epoches e "\
+            "ON e.id = a.epoch_id "\
+            "WHERE e.href = '{}'".format(epoch_href)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection]
+
+    def get_artist_by_id(self, artist_id):
+        request = \
+            "SELECT a.id, a.name, a.href, a.description, a.main_image "\
+            "FROM artists a "\
+            "WHERE a.id = '{}'".format(artist_id)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
+###### SONGS ######
+    def get_top_songs_by_epoch(self, epoch_href, limit):
+        request = \
+            "SELECT s.id, a.name, s.title "\
+            "FROM songs s "\
+            "LEFT JOIN artists a "\
+            "ON s.artist_id = a.id "\
+            "LEFT JOIN epoches e "\
+            "ON a.epoch_id = e.id "\
+            "WHERE e.href = '{}' "\
+            "LIMIT {}".format(epoch_href, limit)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection]
+    
+    def get_song_by_id(self, song_id):
+        request = \
+            "SELECT s.title "\
+            "FROM songs s "\
+            "WHERE s.id = '{}'".format(song_id)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
+###### NOTES ######
