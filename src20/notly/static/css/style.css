@@ -10,3 +10,7 @@
     overflow: hidden;
     max-height: 150px;
 }
+
+.jumbotron-small-text {
+    font-size: 13px;
+}
