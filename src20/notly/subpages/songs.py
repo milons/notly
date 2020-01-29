@@ -1,6 +1,5 @@
 from flask import send_from_directory, session, render_template
 from notly import app
-from notly.services.database_service import NotlyDbService
 from notly.services.song_service import SongService
 
 

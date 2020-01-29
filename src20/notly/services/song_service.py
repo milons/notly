@@ -13,3 +13,7 @@ class SongService:
         with self.notly_db_handler as notly_db:
             return notly_db.get_top_songs_by_epoch(epoch_href, limit)
     
+    def get_songs_by_artist_href(self, artist_href):
+        with self.notly_db_handler as notly_db:
+            return notly_db.get_songs_by_artist_href(artist_href)
+    

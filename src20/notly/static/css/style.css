@@ -14,3 +14,13 @@
 .jumbotron-small-text {
     font-size: 13px;
 }
+
+.artist_card>a {
+    overflow: hidden;
+    height: 250px;
+}
+
+.artist_card {
+    width: 16rem;
+    height: 260px;
+}

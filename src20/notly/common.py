@@ -1,7 +1,7 @@
 import os
 from flask import send_from_directory, session, render_template
 from notly import app, sess
-from notly.subpages import epoches, songs
+from notly.subpages import epoches, songs, artists
 
 
 @app.route('/', methods=['GET'])

@@ -43,14 +43,12 @@
                 <h3>Artists</h3>
             </div>
             {% for artist in artists %}
-            <div class="col-lg-4">
-                <div class="card artist_card" style="width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card artist_card">
                     <a href="/artist/{{artist.href}}"><img class="card-img-top"
                             src="/static/images/{{ artist.main_image }}" alt="{{ artist.name }}"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ artist.name }}</h5>
-                        <!-- <p class="card-text text-justify">{{ artist.description }}</p> -->
-                        <a href="/artist/{{artist.href}}" class="btn btn-primary">Show</a>
+                        <h6 class="card-title">{{ artist.name }}</h6>
                     </div>
                 </div>
             </div>
