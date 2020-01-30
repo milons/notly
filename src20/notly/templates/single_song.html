@@ -15,15 +15,53 @@
             <div class="col">
                 <div class="jumbotron jumbotron-fluid">
                     <h1>{{ song.title }}</h1>
-                    <h2>{{ artist.name }}</h2>>
+                    <h2>{{ artist.name }} <small><a href="/artist/{{ artist.href }}">(show more)</a></small></h2>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Notes</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <h4>Upload new</h4>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupNewNoteUpload">
+                        <label class="custom-file-label" for="inputGroupNewNoteUpload">Choose file</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    {% for note in notes %}
+                    <li class="list-group-item">
+                        <a href="/download-note/{{note.id}}">{{ note.filename }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
     {% include "footer.html" %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>\
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $("#inputGroupNewNoteUpload").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            console.log(fileName);
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 
 </html>

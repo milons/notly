@@ -49,7 +49,7 @@ class NotlyDbService:
 
     def get_epoch_by_artist_href(self, artist_href):
         request = \
-            "SELECT e.name, e.main_image, e.full_description, e.starting_year, e.ending_year "\
+            "SELECT e.href, e.name, e.main_image, e.full_description, e.starting_year, e.ending_year "\
             "FROM epoches e "\
             "LEFT JOIN artists a "\
             "ON e.id = a.epoch_id "\
@@ -93,6 +93,17 @@ class NotlyDbService:
             "SELECT a.name, a.description, a.href, a.main_image "\
             "FROM artists a "\
             "WHERE a.id = '{}'".format(artist_id)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
+    def get_artist_by_song_id(self, song_id):
+        request = \
+            "SELECT a.name, a.href, a.main_image "\
+            "FROM artists a "\
+            "LEFT JOIN songs s "\
+            "ON a.id = s.artist_id "\
+            "WHERE s.id = '{}'".format(song_id)
         self.cursor.execute(request)
         collection = self.cursor.fetchall()
         return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
