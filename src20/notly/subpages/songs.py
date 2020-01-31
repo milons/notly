@@ -10,5 +10,3 @@ def get_song_by_id(song_id):
         'single_song.html',
         song=SongService().get_song_by_id(song_id),
         artist=ArtistService().get_artist_by_song_id(song_id))
-
-
