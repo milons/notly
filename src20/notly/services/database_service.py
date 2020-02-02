@@ -125,7 +125,7 @@ class NotlyDbService:
     
     def get_song_by_id(self, song_id):
         request = \
-            "SELECT s.title "\
+            "SELECT s.id, s.title "\
             "FROM songs s "\
             "WHERE s.id = '{}'".format(song_id)
         self.cursor.execute(request)
@@ -142,4 +142,23 @@ class NotlyDbService:
         self.cursor.execute(request)
         collection = self.cursor.fetchall()
         return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection]
+
+
 ###### NOTES ######
+    def new_note(self, song_id, file_name):
+        request = \
+            "INSERT INTO NOTES(song_id, file_name) "\
+            "VALUES ({}, '{}')".format(song_id, file_name)
+        self.cursor.execute(request)
+        self.connection.commit()
+    
+    def get_notes_by_song_id(self, song_id):
+        request = \
+            "SELECT n.id, n.file_name "\
+            "FROM notes n "\
+            "LEFT JOIN songs s "\
+            "ON s.id = n.song_id "\
+            "WHERE s.id = '{}'".format(song_id)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection]
