@@ -5,17 +5,18 @@ from notly.services.artist_service import ArtistService
 from notly.services.song_service import SongService
 from notly.services.credential_service import CredentialService
 
-@app.route('/login', methods=['GET'])
-def get_login_page(message=None):
+@app.route('/register', methods=['GET'])
+def get_register_page(message=None):
     if 'user' in session:
         return redirect('/')
-    return render_template('login.html',
+    return render_template('register.html',
         message=message)
 
-@app.route('/login/process', methods=['POST'])
-def process_login():
+@app.route('/register/process', methods=['POST'])
+def process_register():
     req_form = request.form.to_dict()
-    login_result = CredentialService().process_login(req_form)
-    if (login_result):
-        return get_login_page(login_result)
+    register_result = CredentialService().process_register(req_form)
+    if (register_result):
+        return get_register_page(register_result)
+    CredentialService().process_login(req_form)
     return redirect('/')

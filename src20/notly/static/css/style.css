@@ -24,3 +24,13 @@
     width: 16rem;
     height: 260px;
 }
+
+.artist_card_artist_list {
+    width: 16rem;
+    height: 320px;
+}
+
+.artist_card_artist_list>a {
+    overflow: hidden;
+    height: 250px;
+}

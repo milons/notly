@@ -15,27 +15,15 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-
                         <div class="jumbotron p-1">
                             <h1>{{ artist.name }}</h1>
-                            <h2>Epoch: {{ epoch.name }} <small><a href="/epoch/{{ epoch.href }}">(show more)</a></small></h2>
-                            <a href="/artist/{{ artist.href }}/description">Show biography</a>
+                            <a href="/artist/{{ artist.href }}">Artist page</a>
+                            <div>
+                                {{ artist.description | safe }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row py-5">
-                    <div class="col-12">
-                        <h3>Songs</h3>
-                    </div>
-                    <ul class="list-group">
-                        {% for song in songs %}
-                        <li class="list-group-item">
-                            <a href="/song/{{song.id}}">{{ artist.name }} - {{ song.title }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
             </div>
             <div class="col-4 artist-image-holder py-5">
                 <img src="/static/images/{{ artist.main_image }}" alt="{{ artist.name }}">

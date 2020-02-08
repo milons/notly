@@ -20,4 +20,14 @@ class ArtistService:
     def get_artist_by_song_id(self, song_id):
         with self.notly_db_handler as notly_db:
             return notly_db.get_artist_by_song_id(song_id)
+
+    def get_artist_with_description_by_href(self, artist_href):
+        with self.notly_db_handler as notly_db:
+            return notly_db.get_artist_with_description_by_href(artist_href)
+
+    def get_top_artists(self):
+        with self.notly_db_handler as notly_db:
+            return notly_db.get_top_artists()
+
+
     

@@ -1,8 +1,7 @@
 import os
 from flask import send_from_directory, session, render_template
 from notly import app, sess
-from notly.subpages import epoches, songs, artists, login, notes
-
+from notly.subpages import artists, epoches, login, notes, register, songs
 
 @app.route('/', methods=['GET'])
 def index():

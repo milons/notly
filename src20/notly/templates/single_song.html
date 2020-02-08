@@ -27,12 +27,12 @@
                 <h3>Notes</h3>
             </div>
         </div>
+        {% if message != None %}
         <div class="alert alert-success py-3" role="alert">
-            <span> Message: {{ message }}</span>
+            <span>{{ message }}</span>
         </div>
-        <!-- {% if message != None %}
-        <span> Message: {{ message }}</span>
-        {% endif %} -->
+        {% endif %}
+        {% if user_logged() %}
         <div class="row py-3">
             <div class="col">
                 <h4>Upload new</h4>
@@ -51,9 +51,17 @@
                 </form>
             </div>
         </div>
+        {% else %}
+        <div class="row py-3">
+            <div class="col">
+                <span>Login to upload new notes</span>
+            </div>
+        </div>
+        {% endif %}
         <div class="row">
             <div class="col">
                 <h4>Existing notes</h4>
+                {% if user_logged() %}
                 <ul class="list-group">
                     {% for note in notes %}
                     <li class="list-group-item">
@@ -61,6 +69,13 @@
                     </li>
                     {% endfor %}
                 </ul>
+                {% else %}
+                <div class="row py-3">
+                    <div class="col">
+                        <span>Login to browse notes</span>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

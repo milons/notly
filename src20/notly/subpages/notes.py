@@ -6,10 +6,11 @@ from notly.services.file_service import FileService
 from notly.subpages.songs import get_song_by_id
 
 @app.route('/note/download/<int:file_id>', methods=['GET'])
-# @login_required
+@login_required
 def download_note(file_id):
-    file_name = FileService().get_filename_by_id(file_id)
-    return send_from_directory(app.config['UPLOAD_FOLDER'], file_name)
+    file_name = NoteService().get_filename_by_id(file_id)
+    file = FileService().get_gile(file_name)
+    return file
 
 @app.route('/note/upload', methods=['POST'])
 # @login_required
