@@ -13,6 +13,10 @@ class EpochService:
         with self.notly_db_handler as notly_db:
             return notly_db.get_epoch(epoch_href)
 
+    def get_epoch_with_description(self, epoch_href):
+        with self.notly_db_handler as notly_db:
+            return notly_db.get_epoch_with_description(epoch_href)
+
     def get_epoch_by_artist_href(self, artist_href):
         with self.notly_db_handler as notly_db:
             return notly_db.get_epoch_by_artist_href(artist_href)

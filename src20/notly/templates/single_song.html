@@ -34,10 +34,10 @@
         {% endif %}
         {% if user_logged() %}
         <div class="row py-3">
-            <div class="col">
+            <div class="col-4">
                 <h4>Upload new</h4>
                 <form action="/note/upload" method="POST" enctype="multipart/form-data">
-                    <div class="input-group">
+                    <div class="input-group py-2">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupNewNoteUpload" name="new-note">
                             <label class="custom-file-label" for="new-note">Choose file</label>
@@ -59,7 +59,7 @@
         </div>
         {% endif %}
         <div class="row">
-            <div class="col">
+            <div class="col-10">
                 <h4>Existing notes</h4>
                 {% if user_logged() %}
                 <ul class="list-group">

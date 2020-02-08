@@ -13,26 +13,14 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <div class="jumbotron p-1">
-                            <h1>{{ artist.name }}</h1>
-                            <a href="/artist/{{ artist.href }}">Back to artist page</a>
-                            <div>
-                                {{ artist.description | safe }}
-                            </div>
-                        </div>
-                    </div>
+                <div class="jumbotron p-1">
+                    <h1>{{ epoch.name }}</h1>
+                    <h2>{{ epoch.starting_year }} - {{ epoch.ending_year }}</h2>
+                    <a href="/epoch/{{ epoch.href }}">Back to epoch page</a>
+                    <div class="jumbotron-small-text text-justify"> {{ epoch.full_description|safe}}</div>
                 </div>
             </div>
-            <div class="col-4 artist-image-holder py-5">
-                <img src="/static/images/{{ artist.main_image }}" alt="{{ artist.name }}">
-            </div>
         </div>
-
-    </div>
-    </div>
-
     </div>
     {% include "footer.html" %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

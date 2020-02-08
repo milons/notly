@@ -20,3 +20,9 @@ def get_epoch(epoch_href):
         epoch=EpochService().get_epoch(epoch_href),
         artists=ArtistService().get_artists_by_epoch(epoch_href),
         songs=SongService().get_top_songs_by_epoch(epoch_href, 10))
+
+@app.route('/epoch/<string:epoch_href>/description', methods=['GET'])
+def get_epoch_with_description(epoch_href):
+    return render_template(
+        'single_epoch_description.html',
+        epoch=EpochService().get_epoch_with_description(epoch_href))

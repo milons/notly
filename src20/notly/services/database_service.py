@@ -68,12 +68,22 @@ class NotlyDbService:
 
     def get_epoch(self, epoch_href):
         request = \
-            "SELECT e.name, e.main_image, e.full_description, e.starting_year, e.ending_year "\
+            "SELECT e.href, e.name, e.main_image, e.starting_year, e.ending_year "\
             "FROM epoches e "\
             "WHERE e.href = '{}'".format(epoch_href)
         self.cursor.execute(request)
         collection = self.cursor.fetchall()
         return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
+    def get_epoch_with_description(self, epoch_href):
+        request = \
+            "SELECT e.href, e.name, e.main_image, e.full_description, e.starting_year, e.ending_year "\
+            "FROM epoches e "\
+            "WHERE e.href = '{}'".format(epoch_href)
+        self.cursor.execute(request)
+        collection = self.cursor.fetchall()
+        return [dict(zip([cursor[0] for cursor in self.cursor.description], element)) for element in collection][0]
+
 
     def get_epoch_by_artist_href(self, artist_href):
         request = \

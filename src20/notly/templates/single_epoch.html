@@ -16,7 +16,7 @@
                 <div class="jumbotron p-1">
                     <h1>{{ epoch.name }}</h1>
                     <h2>{{ epoch.starting_year }} - {{ epoch.ending_year }}</h2>
-                    <div class="jumbotron-small-text text-justify"> {{ epoch.full_description|safe}}</div>
+                    <a href="/epoch/{{ epoch.href }}/description">Show description</a>
                 </div>
             </div>
             <div class="col py-2">
