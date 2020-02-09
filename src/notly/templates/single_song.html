@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ song.title }} | Notly</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <h1>{{ song.title }}</h1>
+                    <h2>{{ artist.name }} <small><a href="/artist/{{ artist.href }}">(show artist page)</a></small></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <h3>Notes</h3>
+            </div>
+        </div>
+        {% if message != None %}
+        <div class="alert alert-success py-3" role="alert">
+            <span>{{ message }}</span>
+        </div>
+        {% endif %}
+        {% if error != None %}
+        <div class="alert alert-danger py-3" role="alert">
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+        {% if user_logged() %}
+        <div class="row py-3">
+            <div class="col-4">
+                <h4>Upload new</h4>
+                <form action="/note/upload" method="POST" enctype="multipart/form-data">
+                    <div class="input-group py-2">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupNewNoteUpload" name="new-note">
+                            <label class="custom-file-label" for="new-note">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="hidden" name="song-id" value="{{ song.id }}">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="row py-3">
+            <div class="col">
+                <span>Login to upload new notes</span>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-10">
+                <h4>Existing notes</h4>
+                {% if user_logged() %}
+                <ul class="list-group">
+                    {% for note in notes %}
+                    <li class="list-group-item">
+                        <a href="/note/download/{{note.id}}" target="_blank">{{ note.file_name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="row py-3">
+                    <div class="col">
+                        <span>Login to browse notes</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% include "footer.html" %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>\
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $("#inputGroupNewNoteUpload").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            console.log(fileName);
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</body>
+
+</html>
