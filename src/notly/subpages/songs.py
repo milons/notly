@@ -1,4 +1,4 @@
-from flask import send_from_directory, session, render_template
+from flask import render_template
 from notly import app
 from notly.services.song_service import SongService
 from notly.services.artist_service import ArtistService

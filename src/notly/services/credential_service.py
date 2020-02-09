@@ -1,4 +1,3 @@
-from notly import app
 from functools import wraps
 from flask import session, redirect, url_for
 from notly.services.database_service import NotlyDbService

@@ -1,6 +1,4 @@
 import sqlite3
-from time import time
-from notly import app
 from notly.config import DatabasePath
 
 

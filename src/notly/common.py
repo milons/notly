@@ -1,5 +1,5 @@
 import os
-from flask import send_from_directory, session, render_template
+from flask import send_from_directory, render_template
 from notly import app, sess
 from notly.subpages import artists, epoches, login, notes, register, songs, signoff
 

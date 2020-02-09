@@ -2,7 +2,6 @@ from notly.services.database_service import NotlyDbService
 
 class NoteService:
     def __init__(self):
-        # self.user = session['user']
         self.notly_db_handler = NotlyDbService()
     
     def new_note(self, song_id, file_name):

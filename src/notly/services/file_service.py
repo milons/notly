@@ -1,4 +1,4 @@
-from random import seed, randint
+from random import randint
 from notly import app
 from flask import send_from_directory
 

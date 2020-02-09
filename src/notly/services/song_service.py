@@ -2,7 +2,6 @@ from notly.services.database_service import NotlyDbService
 
 class SongService:
     def __init__(self):
-        # self.user = session['user']
         self.notly_db_handler = NotlyDbService()
 
     def get_song_by_id(self, song_id):
